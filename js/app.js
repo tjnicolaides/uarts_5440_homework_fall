@@ -11,9 +11,9 @@ function printTask(task) {
     }
         
     if(task.complete) {
-        return '<li class="list-group-item success"><span class="glyphicon glyphicon-chevron-right"></span>   ' + task.description + '</li>'; 
+        return $('<li/>', {'class' : 'list-group-item success'}).text(' ' + task.description).prepend($('<span/>', {'class' : 'glyphicon glyphicon-chevron-right'}));
     } else {
-        return '<li class="list-group-item"><span class="glyphicon glyphicon-chevron-right"></span>   ' + task.description + '</li>'; 
+        return $('<li/>', {'class' : 'list-group-item'}).text(' ' + task.description).prepend($('<span/>', {'class' : 'glyphicon glyphicon-chevron-right'}));
     }
     
 }
@@ -21,10 +21,10 @@ function printTask(task) {
 function removeCompleted() {
     $('.success').remove();
 }
-
+var to_dos;
 
 $(document).ready(function(){
-    var to_dos = [{'complete': false },
+    to_dos = [{'complete': false },
     {'description' : 'mess up my to do app'},
     {'description': 'Take out the garbage', 'complete': false}, 
     {'description': 'Wash the dishes', 'complete': false}, 
@@ -32,23 +32,20 @@ $(document).ready(function(){
     {'description': 'Vacuum and dust', 'complete': false}, 
     {'description': 'Kick back and relax', 'complete': true}];
     
-    var html_container = '<ul class="list-group">';
+    var $ul = $('<ul/>', {'class' : 'nav nav-list'});
     
     for(var i=0; i < to_dos.length; i++) {
         
         try {
-            html_container += printTask(to_dos[i]);
+            $ul.append(printTask(to_dos[i]));
         } catch(error) {
             console.log("There was an error: " + error);
         }
         
     }    
     
-    html_container += '</ul>';
-    
-    console.log(html_container);
-    
-    $('.panel-primary').append(html_container);    
+    $('.panel-primary').append($ul);    
+
 });
 
 
