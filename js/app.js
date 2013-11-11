@@ -21,6 +21,35 @@ function printTask(task) {
 function removeCompleted() {
     $('.success').remove();
 }
+
+function Task(description) {
+        // take description as an argument
+    var obj = {};
+    
+        obj.description = description || 'Default task name';
+        obj.complete = false;
+    
+    var dueDate = new Date();
+        dueDate.setDate(dueDate.getDate() + 7);
+        obj.dueDate = dueDate; // add due date property
+        
+    return obj;
+    // return object
+}
+
+function addTask(description) {
+    // take descripton as an argument
+    // fire new Task();
+    
+    var newTask = new Task(description);
+    
+    to_dos.push(newTask); // add the new task to to_dos using .push
+    
+    var $li = printTask(newTask);
+
+    $('ul.nav-list').append($li);  // add the new task to the DOM
+}
+
 var to_dos;
 
 $(document).ready(function(){
