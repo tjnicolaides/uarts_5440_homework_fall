@@ -50,6 +50,20 @@ function addTask(description) {
     $('ul.nav-list').append($li);  // add the new task to the DOM
 }
 
+function markComplete($task) {
+    // mark the task HTML complete with .success
+    
+    $task.addClass('success');
+    
+    // loop through to_dos array and change the "complete" property
+    for(var i=0; i < to_dos.length; i++) { 
+        if($task.text().indexOf(to_dos[i].description) > -1) {
+            to_dos[i].complete = true;
+        }
+
+    }
+}
+
 var to_dos;
 
 $(document).ready(function(){
@@ -73,7 +87,19 @@ $(document).ready(function(){
         
     }    
     
-    $('.panel-primary').append($ul);    
+    $('.panel-primary').append($ul);
+    
+    $ul.on('dblclick', 'li', function(){
+        markComplete($(this));
+    });
+    
+    $('#newTaskForm').on('submit', function(event){
+        event.preventDefault();
+
+        var newTaskName = $(this).find('input').val();
+        
+        addTask(newTaskName);
+    });
 
 });
 
