@@ -52,7 +52,7 @@ function addTask(description) {
             console.log(data);
         }
     });
-    
+
     to_dos.push(newTask); // add the new task to to_dos using .push
     
     var $li = printTask(newTask);
@@ -107,6 +107,5 @@ $(document).ready(function(){
         
 
 });
-
 
 
